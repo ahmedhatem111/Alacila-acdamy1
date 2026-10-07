@@ -23,22 +23,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
-      - name: Configure Supabase
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
-        run: |
-          node <<'NODE'
-          const fs = require("node:fs");
-          const config = {
-            supabaseUrl: process.env.SUPABASE_URL,
-            supabaseKey: process.env.SUPABASE_ANON_KEY,
-          };
-          if (!config.supabaseUrl || !config.supabaseKey) {
-            throw new Error("Set SUPABASE_URL and SUPABASE_ANON_KEY in repository Actions secrets.");
-          }
-          fs.writeFileSync("config.js", `window.AHLIA_CONFIG = ${JSON.stringify(config, null, 2)};\n`);
-          NODE
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
