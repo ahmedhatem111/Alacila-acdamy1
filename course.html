@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>الكورس | أهلية أكاديمي</title>
+  <script>
+    /* page guard: only signed-in users can open this page */
+    try { if (!JSON.parse(localStorage.getItem("ahlia_user"))) throw 0; }
+    catch (e) { location.replace("login.html?next=" + encodeURIComponent(location.pathname.split("/").pop())); }
+  </script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#050a2a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="أهلية">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <script src="theme.js"></script>
+  <script src="config.js"></script>
+  <script src="backend.js"></script>
+  <script src="store.js"></script>
+<style>
+#cp{
+&{--bg:#050b1f;--panel:#0a1330;--panel2:#0d1a3d;--line:#1b2a57;--tx:#e8eeff;--mut:#8b9acb;--pri:#2f7bff;--ok:#22c55e;--r:14px}
+& *{box-sizing:border-box;margin:0}
+&{color:var(--tx);font-family:Cairo,system-ui,sans-serif;padding:16px 0 32px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
+.top{display:flex;align-items:center;justify-content:space-between;max-width:1500px;margin:0 auto 14px}
+.top a{color:var(--mut);text-decoration:none}
+.grid{display:grid;grid-template-columns:300px 1fr 330px;gap:14px;max-width:1500px;margin:auto}
+.box{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.mut{color:var(--mut);font-size:.85rem}
+.bar{height:6px;background:#16234d;border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--pri);width:0;transition:width .4s}
+.btn{display:block;width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:transparent;margin-top:10px;text-align:center}
+.btn.p{background:var(--pri);border-color:var(--pri);font-weight:700}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+/* playlist */
+.sec h4{display:flex;justify-content:space-between;padding:12px 4px 6px;font-size:.95rem}
+.lec{display:flex;align-items:center;gap:8px;width:100%;padding:9px 8px;border:0;background:none;border-radius:8px;text-align:right;font-size:.88rem}
+.lec:hover:not(:disabled){background:#11204a}
+.lec.on{background:#14306f;outline:1px solid var(--pri)}
+.lec:disabled{opacity:.5;cursor:not-allowed}
+.lec span:first-child{flex:1}
+.lec .st{width:18px;text-align:center}
+/* main */
+h1{font-size:1.4rem;margin:6px 0 4px}
+.stage{position:relative;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;margin-top:12px}
+.stage>div,.stage iframe{position:absolute;inset:0;width:100%;height:100%}
+.seg{display:flex;gap:3px;direction:rtl;margin-top:6px}
+.seg button{flex:1;height:10px;border:0;padding:0;border-radius:3px;background:#16234d;position:relative;overflow:hidden}
+.seg button i{position:absolute;inset:0 auto 0 0;background:var(--pri);width:0}
+.seg button.done i{background:var(--ok)}
+.seg button.on{outline:1px solid #fff}
+.seg button:disabled{cursor:not-allowed}
+.segtxt{display:flex;justify-content:space-between;margin-top:6px}
+.notes{margin-top:16px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#07102a}
+.notes h4{color:var(--pri);margin-bottom:8px}
+.notes ul{padding-right:18px;line-height:1.9}
+.notes pre{direction:ltr;text-align:left;margin-top:12px;padding:12px;border-radius:10px;background:#050b1f;border:1px solid var(--line);overflow:auto;font-size:.85rem}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0d1a3d;border:1px solid var(--pri);padding:12px 16px;border-radius:12px;z-index:50;max-width:92vw;display:none;box-shadow:0 8px 30px #0008}
+.toast.show{display:block}
+.toast button,.crow button{margin-inline-start:8px;padding:4px 12px;border-radius:8px;border:1px solid var(--line);background:#14306f;font-size:.8rem}
+.crow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.crow button:disabled{opacity:.4;cursor:not-allowed}
+.done2{margin-top:12px;padding:14px;border-radius:12px;background:#0d2b1c;border:1px solid var(--ok);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.done2 button{padding:8px 16px;border-radius:10px;border:0;background:var(--ok);color:#04210f;font-weight:700}
+.view{display:none}.view.show{display:block}
+/* quiz */
+.q{padding:14px 0;border-bottom:1px solid var(--line)}
+.q label{display:block;padding:9px 12px;margin-top:8px;border:1px solid var(--line);border-radius:10px;cursor:pointer}
+.q input{margin-left:8px}
+.q label.right{border-color:var(--ok);background:#0d2b1c}
+.q label.wrong{border-color:#ef4444;background:#2b1010}
+.res{padding:14px;border-radius:10px;margin-top:12px;background:#0d1a3d;text-align:center;font-weight:700}
+canvas{width:100%;border-radius:12px;border:1px solid var(--line);margin-top:10px}
+input.nm{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#07102a;color:var(--tx);font:inherit;margin-top:8px}
+@media(max-width:1000px){.grid{grid-template-columns:1fr}.main{order:-1}}
+}
+</style>
+</head>
+<body data-page="course">
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <svg class="logo__icon" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f7bff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+          <path d="M24 3 L44 44 L34 44 L24 22 L14 44 L4 44 Z" fill="url(#lg)"/><path d="M24 30 L30 44 L18 44 Z" fill="#a78bfa"/>
+        </svg>
+        <span>أهلية أكاديمي</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="القائمة الرئيسية">
+        <a href="index.html#home">الرئيسية</a>
+        <a href="index.html#years">السنوات الدراسية</a>
+        <a href="index.html#majors">التخصصات</a>
+        <a href="courses.html" class="active">الكورسات</a>
+        <a href="staff.html">هيئة التدريس</a>
+        <a href="movies.html">الأفلام</a>
+        <a href="schedule.html">جدولي</a>
+        <a href="teams.html">زملاء المشروع</a>
+      </nav>
+      <div class="header__actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="تفعيل الألوان المريحة للعين" title="تفعيل الألوان المريحة للعين"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.200"/><path d="M12 2v2.500M12 19.500V22M2 12h2.500M19.500 12H22M4.900 4.900l1.800 1.800M17.300 17.300l1.800 1.800M4.900 19.100l1.800-1.800M17.300 6.700l1.800-1.800"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.800A9 9 0 1111.200 3a7 7 0 009.800 9.800z"/></svg></button>
+        <span class="hello">أهلاً، <b data-user-name></b></span>
+        <button type="button" class="btn btn--outline btn--sm" id="logout">خروج</button>
+        <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+<div id="cp" class="container">
+<div class="top"><a href="courses.html">← العودة إلى الكورسات</a><span class="mut" id="who"></span></div>
+<div class="grid">
+  <aside class="box" id="side"></aside>
+
+  <main class="main">
+    <div class="box">
+      <div class="crow"><div class="mut" id="crumb"></div><div class="mut"><span id="cnt"></span><button id="prev" data-nav="-1">‹ السابق</button><button id="next" data-nav="1">التالي ›</button></div></div>
+      <h1 id="title"></h1>
+
+      <!-- فيديو -->
+      <div class="view show" id="v-video">
+        <div class="stage"><div id="yt"></div></div>
+        <div class="seg" id="seg" aria-label="تقدم الفيديوهات"></div>
+        <div class="segtxt mut"><span id="segL"></span><span id="segR"></span></div>
+        <div class="done2" id="done" style="display:none"></div>
+        <div class="notes" id="notes"></div>
+      </div>
+
+      <!-- اختبار -->
+      <div class="view" id="v-quiz"></div>
+
+      <!-- شهادة -->
+      <div class="view" id="v-cert">
+        <p class="mut">اكتب اسمك زي ما عايزه يظهر على الشهادة:</p>
+        <input class="nm" id="nm" placeholder="الاسم الكامل">
+        <canvas id="cv" width="1200" height="850"></canvas>
+        <button class="btn p" id="dl">تحميل الشهادة (PNG)</button>
+      </div>
+    </div>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <aside class="box" id="info"></aside>
+</div>
+
+</div>
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__text">معاً نحو مستقبل أفضل &nbsp;|&nbsp; طلاب أهلية &nbsp;|&nbsp; <a href="team.html" class="footer__link">فريق العمل</a></p>
+    </div>
+  </footer>
+<script src="course-data.js"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+/* ============ إعدادات الكورس — غيّرها فقط ============ */
+const _q = decodeURIComponent(new URLSearchParams(location.search).get("id")||"").trim();
+const _all = window.COURSES||{};
+const COURSE_ID = _all[_q] ? _q : Object.keys(_all).find(x=>{const t=_all[x].title||"";return _q&&(t===_q||t.includes(_q)||_q.includes(t));});
+const COURSE = _all[COURSE_ID] && {id:COURSE_ID, ..._all[COURSE_ID]};
+if(!COURSE){
+  document.querySelector("#cp").innerHTML=`<div class="box" style="text-align:center;padding:40px"><h2>الكورس ده مش متاح لسه</h2><p class="mut" style="margin:10px 0">لم نجد كورس بالمعرّف: ${_q.replace(/</g,"")||"—"}</p><a href="courses.html" style="color:var(--pri)">← العودة إلى الكورسات</a></div>`;
+  throw new Error("course not found");
+}
+document.title = COURSE.title+" | أهلية أكاديمي";
+// بيانات المستخدم: اربطها بنظام تسجيل الدخول عندك
+const _u = (()=>{try{return JSON.parse(localStorage.getItem("ahlia_user"))||{}}catch(e){return {}}})();
+const USER = {id:String(_u.id||"guest"), name:_u.name||""};
+// (اختياري) رابط API لحفظ التقدم في قاعدة بياناتك. فاضي = حفظ في المتصفح فقط
+const API_URL = "/api/course-progress";
+/* ===================================================== */
+
+const $ = s => document.querySelector(s);
+const LEC = COURSE.sections.flatMap((s,si)=>s.l.map(l=>({...l,si})));
+const KEY = `progress:${COURSE.id}:${USER.id}`;
+let P = {cur:0, pos:{}, max:{}, w:{}, done:{}, quiz:null, name:USER.name};
+try{ P = {...P, ...JSON.parse(localStorage.getItem(KEY)||"{}")}; }catch(e){}
+if(API_URL) AhliaStore.api("GET",`${API_URL}?course=${encodeURIComponent(COURSE.id)}`).then(d=>{P={...P,...d};render();loadCur()}).catch(()=>{});
+
+const k = i => i+"-"+LEC[i].id;               // مفتاح مميز لكل محاضرة
+const isDone = i => !!P.done[k(i)];
+const open_ = i => i===0 || isDone(i-1) || isDone(i);
+const doneCount = () => LEC.filter((_,i)=>isDone(i)).length;
+const allDone = () => doneCount()===LEC.length;
+const fmt = s => `${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,"0")}`;
+
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(P)); }catch(e){}
+  if(API_URL) AhliaStore.api("POST",API_URL,{course:COURSE.id,progress:P}).catch(()=>{});
+}
+
+/* ---------- واجهة ---------- */
+function render(){
+  const n = doneCount(), pct = Math.round(n/LEC.length*100);
+  $("#who").textContent = USER.name;
+  $("#crumb").textContent = `${COURSE.title} › ${COURSE.sections[LEC[P.cur].si].t}`;
+  $("#title").textContent = `${P.cur+1}. ${LEC[P.cur].t}`;
+
+  let idx=0, h=`<h3>${COURSE.title}</h3><div class="mut">${COURSE.sub}</div>
+  <div class="bar" style="margin:10px 0 4px"><i style="width:${pct}%"></i></div><div class="mut">${pct}% — ${n} من ${LEC.length} مكتملة</div><h3 style="margin-top:14px">محتوى الكورس</h3>`;
+  COURSE.sections.forEach((s,si)=>{
+    h+=`<div class="sec"><h4><span>${si+1}. ${s.t}</span><span class="mut">${s.l.filter((_,j)=>isDone(idx+j)).length}/${s.l.length}</span></h4>`;
+    s.l.forEach(l=>{const i=idx++;
+      h+=`<button class="lec ${i===P.cur?"on":""}" data-i="${i}" ${open_(i)?"":"disabled"}><span class="st">${isDone(i)?"✅":open_(i)?"▶":"🔒"}</span><span>${l.t}</span></button>`});
+    h+="</div>";
+  });
+  h+=`<button class="btn p" id="goQuiz" ${allDone()?"":"disabled"}>🏆 الانتقال إلى الاختبار النهائي</button>`;
+  $("#side").innerHTML=h;
+
+  const ok = P.quiz && P.quiz.passed;
+  $("#info").innerHTML=`<h3>${COURSE.title}</h3><p class="mut" style="margin:8px 0">${COURSE.desc||""}</p><div class="mut">المدرب: ${COURSE.instructor}</div>
+   <div class="mut" style="margin-top:8px">عدد المحاضرات: ${LEC.length}</div>
+   <div class="mut" style="margin:14px 0 6px">تقدمك في الكورس: ${pct}%</div><div class="bar"><i style="width:${pct}%"></i></div>
+   <button class="btn p" id="cont">▶ متابعة الكورس</button>
+   <button class="btn" id="certBtn" ${ok?"":"disabled"}>🎓 ${ok?"تحميل الشهادة":"الشهادة بعد النجاح في الاختبار"}</button>`;
+
+  // الشريط المتصل بالفيديو
+  $("#seg").innerHTML = LEC.map((l,i)=>`<button class="${isDone(i)?"done":""} ${i===P.cur?"on":""}" data-i="${i}" ${open_(i)?"":"disabled"} title="${l.t}"><i style="width:${isDone(i)?100:Math.round((P.max[k(i)]||0)*100)}%"></i></button>`).join("");
+  const L=LEC[P.cur], nb=$("#notes");
+  nb.style.display=(L.n||L.code)?"block":"none";
+  nb.innerHTML=`<h4>💡 ملاحظات المحاضرة</h4>`+(L.n?`<ul>${L.n.map(x=>`<li>${x}</li>`).join("")}</ul>`:"")+(L.code?`<pre>${L.code.replace(/</g,"&lt;")}</pre>`:"");
+  $("#cnt").textContent=`المحاضرة ${P.cur+1} من ${LEC.length}`;
+  $("#prev").disabled=P.cur===0; $("#next").disabled=P.cur===LEC.length-1||!open_(P.cur+1);
+  const dn=$("#done"); dn.style.display=(allDone()&&!ok)?"flex":"none";
+  dn.innerHTML=`<span>🎉 خلصت كل الفيديوهات! الاختبار النهائي اتفتح.</span><button id="goQuiz2">ابدأ الاختبار</button>`;
+  $("#segL").textContent=`${n} / ${LEC.length} فيديو مكتمل`; $("#segR").textContent=pct+"%";
+}
+
+function show(v){ document.querySelectorAll(".view").forEach(e=>e.classList.toggle("show",e.id==="v-"+v));
+  if(v!=="video" && player && player.pauseVideo) player.pauseVideo(); }
+
+/* ---------- مشغل يوتيوب ---------- */
+let player, timer, ready=false, lastT=null, ct, pendingNext=null;
+window.onYouTubeIframeAPIReady = () => {
+  player = new YT.Player("yt",{width:"100%",height:"100%",
+    videoId:LEC[P.cur].id, playerVars:{start:Math.floor(P.pos[k(P.cur)]||0),rel:0,modestbranding:1,playsinline:1,...(/^https?:/.test(location.protocol)?{origin:location.origin}:{})},
+    events:{onReady:()=>{ready=true}, onError:e=>{
+      const m={153:"افتح الموقع من سيرفر (http://localhost أو الدومين) مش من ملف مباشر.",101:"صاحب الفيديو مانع تشغيله خارج يوتيوب.",150:"صاحب الفيديو مانع تشغيله خارج يوتيوب.",100:"الفيديو غير موجود أو خاص — راجع الكود.",2:"كود الفيديو غير صحيح."};
+      toast(`⚠️ تعذّر تشغيل الفيديو (خطأ ${e.data}): ${m[e.data]||"جرّب فيديو تاني."}`,9000);}, onStateChange:e=>{
+      if(e.data===1){ clearInterval(timer); timer=setInterval(tick,1000); }
+      else {clearInterval(timer); lastT=null;}
+      if(e.data===0) finish();
+    }}});
+};
+function loadCur(){ if(!ready) return; lastT=null;
+  const t=P.pos[k(P.cur)]||0;
+  player.loadVideoById({videoId:LEC[P.cur].id,startSeconds: isDone(P.cur)?0:t}); }
+function tick(){
+  const d=player.getDuration(), t=player.getCurrentTime(); if(!d) return;
+  const key=k(P.cur);
+  // نعدّ الوقت اللي اتشاف فعلًا فقط (التقديم/القفز مش بيتحسب)
+  if(lastT!==null){const dt=t-lastT; if(dt>0 && dt<=3*(player.getPlaybackRate()||1)) P.w[key]=Math.min(d,(P.w[key]||0)+dt);}
+  lastT=t; P.pos[key]=t; P.max[key]=(P.w[key]||0)/d;
+  if(P.max[key]>=0.9 && !P.done[key]){ P.done[key]=true; toast("✅ تم احتساب الفيديو مكتمل",2500); }
+  if(Math.floor(t)%3===0) save();
+  render();
+}
+function toast(h,ms){const t=$("#toast");t.innerHTML=h;t.classList.add("show");clearTimeout(toast.t);if(ms)toast.t=setTimeout(hideToast,ms);}
+function hideToast(){$("#toast").classList.remove("show");}
+function finish(){
+  const key=k(P.cur);
+  if(!P.done[key]){ toast("⚠️ لازم تشوف الفيديو كامل عشان يتحسب مكتمل. ارجع للأجزاء اللي اتخطيتها.",5000); P.pos[key]=0; save(); return; }
+  P.pos[key]=0; save(); render();
+  if(P.cur<LEC.length-1) countdown(P.cur+1);
+  else toast("🎉 خلصت كل الفيديوهات! الاختبار النهائي اتفتح.",6000);
+}
+function countdown(i){
+  let n=4; pendingNext=i; clearInterval(ct);
+  const upd=()=>toast(`✅ خلص الفيديو — التالي بعد ${n} ثواني: <b>${LEC[i].t}</b> <button data-act="now">شغّله الآن</button><button data-act="cancel">إلغاء</button>`,0);
+  upd(); ct=setInterval(()=>{n--; if(n<=0){clearInterval(ct);hideToast();go(i);} else upd();},1000);
+}
+function go(i){ if(i<0||i>=LEC.length||!open_(i)) return; clearInterval(ct); hideToast(); P.cur=i; save(); show("video"); render(); loadCur(); }
+addEventListener("pagehide",()=>{ if(ready&&player.getCurrentTime){P.pos[k(P.cur)]=player.getCurrentTime();} save(); });
+
+/* ---------- الاختبار ---------- */
+function quiz(){
+  show("quiz"); $("#title").textContent="الاختبار النهائي"; $("#crumb").textContent=COURSE.title;
+  $("#v-quiz").innerHTML = COURSE.quiz.map((q,i)=>`<div class="q"><b>${i+1}. ${q.q}</b>${q.a.map((a,j)=>`<label><input type="radio" name="q${i}" value="${j}">${a}</label>`).join("")}</div>`).join("")
+   +`<button class="btn p" id="sub">تسليم الإجابات</button><div id="res"></div>`;
+  $("#sub").onclick=()=>{
+    let s=0; COURSE.quiz.forEach((q,i)=>{
+      const c=document.querySelector(`input[name=q${i}]:checked`);
+      document.querySelectorAll(`input[name=q${i}]`).forEach(inp=>{const L=inp.parentElement;
+        if(+inp.value===q.c) L.classList.add("right"); else if(inp.checked) L.classList.add("wrong"); inp.disabled=true});
+      if(c && +c.value===q.c) s++; });
+    const pct=Math.round(s/COURSE.quiz.length*100), passed=pct>=COURSE.pass;
+    P.quiz={score:pct,passed:passed||(P.quiz&&P.quiz.passed)}; save(); render();
+    $("#sub").remove();
+    $("#res").innerHTML=`<div class="res">${passed?`🎉 نجحت! نتيجتك ${pct}%`:`نتيجتك ${pct}% — النجاح من ${COURSE.pass}%`}</div>
+      <button class="btn p" id="after">${passed?"استلام الشهادة":"إعادة الاختبار"}</button>`;
+    $("#after").onclick=()=>passed?cert():quiz();
+  };
+}
+
+/* ---------- الشهادة ---------- */
+function drawCert(){
+  const c=$("#cv"),x=c.getContext("2d"),W=c.width,H=c.height;
+  x.fillStyle="#07102a";x.fillRect(0,0,W,H);
+  x.strokeStyle="#2f7bff";x.lineWidth=6;x.strokeRect(40,40,W-80,H-80);
+  x.strokeStyle="#1b2a57";x.lineWidth=2;x.strokeRect(60,60,W-120,H-120);
+  x.textAlign="center";x.direction="rtl";x.fillStyle="#e8eeff";
+  x.font="700 60px Cairo,sans-serif";x.fillText("شهادة إتمام كورس",W/2,200);
+  x.fillStyle="#8b9acb";x.font="400 32px Cairo,sans-serif";x.fillText("تشهد أهلية أكاديمي بأن",W/2,300);
+  x.fillStyle="#2f7bff";x.font="700 80px Cairo,sans-serif";x.fillText(P.name||"—",W/2,430);
+  x.fillStyle="#8b9acb";x.font="400 32px Cairo,sans-serif";x.fillText("قد أتم بنجاح كورس",W/2,520);
+  x.fillStyle="#e8eeff";x.font="700 56px Cairo,sans-serif";x.fillText(`${COURSE.title} — ${COURSE.sub}`,W/2,610);
+  x.fillStyle="#8b9acb";x.font="400 28px Cairo,sans-serif";
+  x.fillText(`النتيجة ${P.quiz.score}%   •   ${new Date().toLocaleDateString("ar-EG")}`,W/2,700);
+  x.fillText(`رقم الشهادة: ${(COURSE.id+USER.id).length}${Math.abs([...COURSE.id+USER.id].reduce((a,c)=>a*31+c.charCodeAt(0)|0,7))}`,W/2,760);
+}
+function cert(){
+  if(!(P.quiz&&P.quiz.passed)) return;
+  show("cert"); $("#title").textContent="شهادة إتمام الكورس"; $("#nm").value=P.name||""; document.fonts.ready.then(drawCert);
+  $("#nm").oninput=e=>{P.name=e.target.value;save();drawCert()};
+  $("#dl").onclick=()=>{const a=document.createElement("a");a.download=`certificate-${COURSE.id}.png`;a.href=$("#cv").toDataURL("image/png");a.click()};
+}
+
+/* ---------- أحداث ---------- */
+document.addEventListener("click",e=>{
+  const a=e.target.closest("[data-act]"); if(a){ clearInterval(ct); hideToast(); if(a.dataset.act==="now") go(pendingNext); return; }
+  const nv=e.target.closest("[data-nav]"); if(nv) return go(P.cur+(+nv.dataset.nav));
+  if(e.target.closest("#goQuiz2")) return quiz();
+  const b=e.target.closest("[data-i]"); if(b) return go(+b.dataset.i);
+  if(e.target.closest("#goQuiz")) return quiz();
+  if(e.target.closest("#certBtn")) return cert();
+  if(e.target.closest("#cont")){ // أول محاضرة غير مكتملة
+    const i=LEC.findIndex((_,j)=>!isDone(j)); show("video"); return go(i<0?P.cur:i); }
+});
+render();
+if(location.protocol==="file:") toast("⚠️ الصفحة مفتوحة كملف مباشر — يوتيوب هيرفض الفيديو (خطأ 153). شغّل الموقع من سيرفر.",0);
+</script>
+<script src="script.js"></script>
+<script src="page.js"></script>
+  <script src="mobile.js"></script>
+</body>
+</html>

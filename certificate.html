@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>الشهادة | أهلية أكاديمي</title>
+  <script>
+    /* page guard: only signed-in users can open this page */
+    try { if (!JSON.parse(localStorage.getItem("ahlia_user"))) throw 0; }
+    catch (e) { location.replace("login.html?next=" + encodeURIComponent(location.pathname.split("/").pop())); }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#050a2a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="أهلية">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <script src="theme.js"></script>
+  <script src="config.js"></script>
+  <script src="backend.js"></script>
+  <script src="store.js"></script>
+</head>
+<body data-page="certificate">
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <svg class="logo__icon" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f7bff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+          <path d="M24 3 L44 44 L34 44 L24 22 L14 44 L4 44 Z" fill="url(#lg)"/><path d="M24 30 L30 44 L18 44 Z" fill="#a78bfa"/>
+        </svg>
+        <span>أهلية أكاديمي</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="القائمة الرئيسية">
+        <a href="index.html#home">الرئيسية</a>
+        <a href="index.html#years">السنوات الدراسية</a>
+        <a href="index.html#majors">التخصصات</a>
+        <a href="courses.html">الكورسات</a>
+        <a href="staff.html">هيئة التدريس</a>
+        <a href="movies.html">الأفلام</a>
+        <a href="schedule.html">جدولي</a>
+        <a href="teams.html">زملاء المشروع</a>
+      </nav>
+      <div class="header__actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="تفعيل الألوان المريحة للعين" title="تفعيل الألوان المريحة للعين"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.200"/><path d="M12 2v2.500M12 19.500V22M2 12h2.500M19.500 12H22M4.900 4.900l1.800 1.800M17.300 17.300l1.800 1.800M4.900 19.100l1.800-1.800M17.300 6.700l1.800-1.800"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.800A9 9 0 1111.200 3a7 7 0 009.800 9.800z"/></svg></button>
+        <span class="hello">أهلاً، <b data-user-name></b></span>
+        <button type="button" class="btn btn--outline btn--sm" id="logout">خروج</button>
+        <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page">
+    <p class="crumbs"><a href="index.html">الرئيسية</a> / <a href="courses.html">الكورسات</a> / <span>الشهادة</span></p>
+    <section class="section">
+      <div id="msg" class="card" style="padding:24px;text-align:center" hidden></div>
+      <div id="cert" class="card cert" hidden>
+        <p class="cert__top">أهلية أكاديمي</p>
+        <h1>شهادة إتمام كورس</h1>
+        <p>تشهد المنصة بأن الطالب/ة</p>
+        <h2 id="cName" class="grad"></h2>
+        <p>قد أتمّ/ت بنجاح جميع محاضرات كورس</p>
+        <h3 id="cCourse"></h3>
+        <p class="cert__date" id="cDate"></p>
+      </div>
+      <p style="text-align:center;margin-top:18px"><button class="btn btn--primary" id="print" type="button" hidden>طباعة / حفظ PDF</button>
+        <a class="btn btn--outline" href="courses.html">رجوع للكورسات</a></p>
+    </section>
+  </main>
+  <style>
+    .cert{padding:48px 24px;text-align:center;max-width:760px;margin:0 auto;border:3px double currentColor}
+    .cert h1{margin:8px 0 18px}.cert h2{font-size:2rem;margin:10px 0}.cert h3{margin:10px 0 22px}
+    .cert__top{letter-spacing:.1em;opacity:.8}.cert__date{opacity:.75;margin-top:24px}
+    @media print{.header,.crumbs,#print,.btn,canvas{display:none!important}body{background:#fff!important;color:#000!important}.cert{border-color:#000}}
+  </style>
+  <script src="script.js"></script>
+  <script src="page.js"></script>
+  <script src="data.js"></script>
+  <script>
+  (() => {
+    const id = new URLSearchParams(location.search).get("course");
+    const all = Object.values((window.AHLIA_DATA || {}).pages || {}).flatMap((p) => p.courses || []);
+    const c = all.find((x) => x.id === id);
+    const u = AhliaStore.getUser();
+    const say = (t) => { const m = document.getElementById("msg"); m.textContent = t; m.hidden = false; };
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!c) return say("الكورس غير موجود.");
+      if (!(c.topics || []).length || AhliaStore.percent(c) < 100) return say("لازم تكمّل كل محاضرات الكورس الأول عشان تحصل على الشهادة.");
+      document.getElementById("cName").textContent = u.name;
+      document.getElementById("cCourse").textContent = c.title;
+      document.getElementById("cDate").textContent = new Date().toLocaleDateString("ar-EG", { year: "numeric", month: "long", day: "numeric" });
+      document.getElementById("cert").hidden = false;
+      const p = document.getElementById("print"); p.hidden = false; p.onclick = () => print();
+    });
+  })();
+  </script>
+  <script src="mobile.js"></script>
+</body>
+</html>

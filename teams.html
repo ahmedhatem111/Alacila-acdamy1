@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ابحث عن تيم | أهلية أكاديمي</title>
+  <script>
+    /* page guard: only signed-in users can open this page */
+    try { if (!JSON.parse(localStorage.getItem("ahlia_user"))) throw 0; }
+    catch (e) { location.replace("login.html?next=" + encodeURIComponent(location.pathname.split("/").pop())); }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#050a2a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="أهلية">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <script src="theme.js"></script>
+  <script src="config.js"></script>
+  <script src="backend.js"></script>
+  <script src="store.js"></script>
+  <style>
+#tp{--panel:#0a1330;--panel2:#0d1a3d;--line:#1b2a57;--tx:#e8eeff;--mut:#8b9acb;--pri:#2f7bff;--ok:#22c55e;--warn:#f59e0b;
+  color:var(--tx);font-family:Cairo,system-ui,sans-serif;padding:20px 0 40px;
+  *{box-sizing:border-box}
+  .head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+  h1{font-size:1.5rem;margin:0}.mut{color:var(--mut);font-size:.88rem}
+  button,select,input,textarea{font:inherit;color:inherit}
+  .b{padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:transparent;cursor:pointer}
+  .b.p{background:var(--pri);border-color:var(--pri);font-weight:700}
+  .b:focus-visible,.tab:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--panel);cursor:pointer}
+  .tab.on{background:var(--pri);border-color:var(--pri)}
+  .fld{padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:#07102a;min-width:150px}
+  .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+  .card.closed{opacity:.55}
+  .tag{align-self:flex-start;padding:3px 12px;border-radius:999px;font-size:.78rem;font-weight:700}
+  .tag.need{background:#3b2a05;color:var(--warn)}.tag.have{background:#0d2b1c;color:var(--ok)}.tag.cl{background:#222;color:#aaa}
+  .card h3{margin:0;font-size:1.1rem}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}.chips span{padding:3px 10px;border-radius:8px;background:#11204a;font-size:.8rem}
+  .card p{margin:0;font-size:.9rem;line-height:1.7}
+  .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+  .foot .b{padding:6px 12px;font-size:.85rem;text-decoration:none;color:var(--tx)}
+  .empty{padding:40px;text-align:center;border:1px dashed var(--line);border-radius:14px}
+  dialog{background:var(--panel2);color:var(--tx);border:1px solid var(--line);border-radius:16px;padding:20px;width:min(480px,94vw)}
+  dialog::backdrop{background:#000a}
+  dialog label{display:block;margin-top:12px;font-size:.9rem}
+  dialog .fld{width:100%;margin-top:4px}
+  .seg2{display:flex;gap:8px;margin-top:6px}.seg2 label{flex:1;margin:0;padding:10px;border:1px solid var(--line);border-radius:10px;cursor:pointer;text-align:center}
+  .seg2 input{display:none}.seg2 label:has(input:checked){border-color:var(--pri);background:#14306f}
+  .acts{display:flex;gap:8px;margin-top:16px}.acts .b{flex:1}
+  .err{color:#f87171;font-size:.85rem;margin-top:8px;min-height:1.2em}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0d1a3d;border:1px solid var(--pri);padding:10px 16px;border-radius:12px;display:none;z-index:50}
+}
+  </style>
+</head>
+<body data-page="teams">
+<header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <svg class="logo__icon" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f7bff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+          <path d="M24 3 L44 44 L34 44 L24 22 L14 44 L4 44 Z" fill="url(#lg)"/><path d="M24 30 L30 44 L18 44 Z" fill="#a78bfa"/>
+        </svg>
+        <span>أهلية أكاديمي</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="القائمة الرئيسية">
+        <a href="index.html#home">الرئيسية</a>
+        <a href="index.html#years">السنوات الدراسية</a>
+        <a href="index.html#majors">التخصصات</a>
+        <a href="courses.html">الكورسات</a>
+        <a href="staff.html">هيئة التدريس</a>
+        <a href="movies.html">الأفلام</a>
+        <a href="schedule.html">جدولي</a>
+        <a href="teams.html" class="active">زملاء المشروع</a>
+      </nav>
+      <div class="header__actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="تفعيل الألوان المريحة للعين" title="تفعيل الألوان المريحة للعين"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.200"/><path d="M12 2v2.500M12 19.500V22M2 12h2.500M19.500 12H22M4.900 4.900l1.800 1.800M17.300 17.300l1.800 1.800M4.900 19.100l1.800-1.800M17.300 6.700l1.800-1.800"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.800A9 9 0 1111.200 3a7 7 0 009.800 9.800z"/></svg></button>
+        <span class="hello">أهلاً، <b data-user-name></b></span>
+        <button type="button" class="btn btn--outline btn--sm" id="logout">خروج</button>
+        <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+<main id="tp" class="container">
+  <div class="head">
+    <div><h1>ابحث عن تيم أو زميل مشروع</h1><div class="mut">محتاج حد يشتغل معاك؟ أو معاك تيم ناقصه أعضاء؟ اكتب طلبك هنا.</div></div>
+    <button class="b p" id="add">+ إضافة طلب</button>
+  </div>
+
+  <div class="bar" role="group" aria-label="نوع الطلب">
+    <button class="tab on" data-t="">الكل</button>
+    <button class="tab" data-t="need">🔎 محتاج تيم</button>
+    <button class="tab" data-t="have">👥 معايا تيم ومحتاج أعضاء</button>
+    <select class="fld" id="fy" aria-label="السنة الدراسية"><option value="">كل السنوات</option><option>الأولى</option><option>الثانية</option><option>الثالثة</option><option>الرابعة</option></select>
+    <input class="fld" id="fq" type="search" placeholder="ابحث بالمادة أو الدور..." aria-label="بحث" style="flex:1">
+  </div>
+  <p class="mut" id="cnt" aria-live="polite"></p>
+  <div class="list" id="list"></div>
+
+  <dialog id="dlg">
+    <form id="frm" method="dialog">
+      <h2 style="margin:0">طلب جديد</h2>
+      <div class="seg2" role="radiogroup" aria-label="نوع الطلب">
+        <label><input type="radio" name="type" value="need" checked>🔎 محتاج تيم</label>
+        <label><input type="radio" name="type" value="have">👥 معايا تيم</label>
+      </div>
+      <label>اسم المادة / المشروع<input class="fld" name="subject" maxlength="60" required placeholder="مثال: قواعد البيانات"></label>
+      <label>الدور <span class="mut" id="roleHint">(اللي إنت بتعرف تعمله)</span><input class="fld" name="role" maxlength="40" required placeholder="مثال: Frontend، تصميم، تقارير..."></label>
+      <label>السنة الدراسية<select class="fld" name="year" required><option>الأولى</option><option>الثانية</option><option>الثالثة</option><option>الرابعة</option></select></label>
+      <label><span id="cntLbl">عدد أفراد التيم المطلوب</span><input class="fld" name="count" type="number" min="1" max="20" value="3" required></label>
+      <label>تفاصيل (اختياري)<textarea class="fld" name="desc" rows="3" maxlength="300"></textarea></label>
+      <label>وسيلة التواصل (واتساب / تيليجرام / رابط)<input class="fld" name="contact" maxlength="80" required placeholder="01xxxxxxxxx أو https://t.me/..."></label>
+      <div class="err" id="err" role="alert"></div>
+      <div class="acts"><button class="b p" type="submit">نشر الطلب</button><button class="b" type="button" id="cancel">إلغاء</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+</main>
+<footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__text">معاً نحو مستقبل أفضل &nbsp;|&nbsp; طلاب أهلية &nbsp;|&nbsp; <a href="team.html" class="footer__link">فريق العمل</a></p>
+    </div>
+  </footer>
+<script>
+const KEY="ahlia_team_posts";
+const U=(()=>{try{return JSON.parse(localStorage.getItem("ahlia_user"))||{}}catch(e){return{}}})();
+const ME={id:String(U.id||"guest"),name:U.name||"طالب"};
+const api=(m,u,b)=>AhliaStore.api(m,u,b);
+let posts=[];
+const f={t:"",y:"",q:""}, $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function toast(m){const t=$("#toast");t.textContent=m;t.style.display="block";clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display="none",2500)}
+
+function contactBtn(p){
+  const c=p.contact.trim(), d=c.replace(/\D/g,"");
+  if(/^https?:\/\//i.test(c)) return `<a class="b" href="${esc(c)}" target="_blank" rel="noopener">تواصل</a>`;
+  if(/^[+\d\s-]{8,}$/.test(c)) return `<a class="b" href="https://wa.me/${d.replace(/^0/,"20")}" target="_blank" rel="noopener">واتساب</a>`;
+  return `<button class="b" data-copy="${esc(c)}">نسخ وسيلة التواصل</button>`;
+}
+function render(){
+  const q=f.q.trim().toLowerCase();
+  const rows=posts.filter(p=>(!f.t||p.type===f.t)&&(!f.y||p.year===f.y)&&(!q||(p.subject+" "+p.role).toLowerCase().includes(q))).sort((a,b)=>(a.closed-b.closed)||b.at-a.at);
+  $("#cnt").textContent=rows.length?`${rows.length} طلب`:"";
+  $("#list").innerHTML=rows.length?rows.map(p=>{
+    const mine=p.uid===ME.id, need=p.type==="need";
+    return `<article class="card ${p.closed?"closed":""}">
+      <span class="tag ${p.closed?"cl":need?"need":"have"}">${p.closed?"اكتمل":need?"محتاج تيم":"معاه تيم ومحتاج أعضاء"}</span>
+      <h3>${esc(p.subject)}</h3>
+      <div class="chips"><span>🎯 ${esc(p.role)}</span><span>🎓 السنة ${esc(p.year)}</span><span>👥 ${need?`تيم من ${p.count} أفراد`:`محتاجين ${p.count} أعضاء`}</span></div>
+      ${p.desc?`<p>${esc(p.desc)}</p>`:""}
+      <div class="foot"><span class="mut">${esc(p.name)} • ${new Date(p.at).toLocaleDateString("ar-EG")}</span>
+      <span style="display:flex;gap:6px">${p.closed?"":contactBtn(p)}${mine?`${p.closed?"":`<button class="b" data-done="${p.id}">اكتمل</button>`}<button class="b" data-del="${p.id}">حذف</button>`:""}</span></div></article>`}).join("")
+   :`<div class="empty" style="grid-column:1/-1">مفيش طلبات مطابقة حاليًا. كن أول واحد يضيف طلب! 🚀</div>`;
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest(".tab"); if(t){document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));f.t=t.dataset.t;return render()}
+  const c=e.target.closest("[data-copy]"); if(c){navigator.clipboard&&navigator.clipboard.writeText(c.dataset.copy);return toast("تم نسخ وسيلة التواصل")}
+  const d=e.target.closest("[data-del]"); if(d){if(confirm("حذف الطلب؟")){api("DELETE","/api/teams/"+d.dataset.del).then(()=>{posts=posts.filter(p=>p.id!==d.dataset.del);render()}).catch(x=>toast(x.message))}return}
+  const k=e.target.closest("[data-done]"); if(k){const p=posts.find(p=>p.id===k.dataset.done);if(p){api("PATCH","/api/teams/"+p.id).then(()=>{p.closed=true;render()}).catch(x=>toast(x.message))}}
+});
+$("#fy").onchange=e=>{f.y=e.target.value;render()}; $("#fq").oninput=e=>{f.q=e.target.value;render()};
+const dlg=$("#dlg"), frm=$("#frm");
+$("#add").onclick=()=>{frm.reset();$("#err").textContent="";sync();dlg.showModal()};
+$("#cancel").onclick=()=>dlg.close();
+function sync(){const need=frm.type.value==="need";$("#cntLbl").textContent=need?"عدد أفراد التيم المطلوب":"عدد الأعضاء اللي محتاجهم";$("#roleHint").textContent=need?"(اللي إنت بتعرف تعمله)":"(الدور المطلوب في التيم)"}
+frm.addEventListener("change",sync);
+frm.addEventListener("submit",e=>{
+  e.preventDefault();
+  const v=Object.fromEntries(new FormData(frm));
+  if(!v.subject.trim()||!v.role.trim()||!v.contact.trim()){$("#err").textContent="املأ الحقول المطلوبة.";return}
+  api("POST","/api/teams",{type:v.type,subject:v.subject.trim(),role:v.role.trim(),year:v.year,count:v.count,desc:(v.desc||"").trim(),contact:v.contact.trim()})
+    .then(p=>{posts.unshift(p);dlg.close();render();toast("تم نشر طلبك ✅")})
+    .catch(x=>{$("#err").textContent=x.message});
+});
+api("GET","/api/teams").then(l=>{posts=l;render()}).catch(x=>{render();toast(x.message)});
+</script>
+<script src="script.js"></script>
+<script src="page.js"></script>
+  <script src="mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>علوم الحاسب | أهلية أكاديمي</title>
+  <script>
+    /* page guard: only signed-in users can open this page */
+    try { if (!JSON.parse(localStorage.getItem("ahlia_user"))) throw 0; }
+    catch (e) { location.replace("login.html?next=" + encodeURIComponent(location.pathname.split("/").pop())); }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#050a2a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="أهلية">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <script src="theme.js"></script>
+  <script src="config.js"></script>
+  <script src="backend.js"></script>
+  <script src="store.js"></script>
+</head>
+<body data-page="cs">
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <svg class="logo__icon" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f7bff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+          <path d="M24 3 L44 44 L34 44 L24 22 L14 44 L4 44 Z" fill="url(#lg)"/><path d="M24 30 L30 44 L18 44 Z" fill="#a78bfa"/>
+        </svg>
+        <span>أهلية أكاديمي</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="القائمة الرئيسية">
+        <a href="index.html#home">الرئيسية</a>
+        <a href="index.html#years">السنوات الدراسية</a>
+        <a href="index.html#majors" class="active">التخصصات</a>
+        <a href="courses.html">الكورسات</a>
+        <a href="staff.html">هيئة التدريس</a>
+        <a href="movies.html">الأفلام</a>
+        <a href="schedule.html">جدولي</a>
+        <a href="teams.html">زملاء المشروع</a>
+      </nav>
+      <div class="header__actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="تفعيل الألوان المريحة للعين" title="تفعيل الألوان المريحة للعين"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.200"/><path d="M12 2v2.500M12 19.500V22M2 12h2.500M19.500 12H22M4.900 4.900l1.800 1.800M17.300 17.300l1.800 1.800M4.900 19.100l1.800-1.800M17.300 6.700l1.800-1.800"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.800A9 9 0 1111.200 3a7 7 0 009.800 9.800z"/></svg></button>
+        <span class="hello">أهلاً، <b data-user-name></b></span>
+        <button type="button" class="btn btn--outline btn--sm" id="logout">خروج</button>
+        <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page">
+    <p class="crumbs"><a href="index.html">الرئيسية</a> / <a href="index.html#majors">التخصصات</a> / <span>علوم الحاسب</span></p>
+
+    <section class="page-hero">
+      <span class="major__icon big"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="11" width="26" height="26" rx="4"/><path d="M18 20l-4 4 4 4M30 20l4 4-4 4M26 18l-4 12M17 5v6M24 5v6M31 5v6M17 37v6M24 37v6M31 37v6"/></svg></span>
+      <div>
+        <h1>علوم الحاسب</h1>
+        <p>البرمجة، الخوارزميات، قواعد البيانات وأساسيات بناء البرمجيات.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <h2>مواد علوم الحاسب</h2>
+        <p>المواد موزّعة على الترمات حسب الخطة الدراسية</p>
+      </div>
+      <div class="courses" id="courses"></div>
+    </section>
+
+    <section class="section" id="staff">
+      <div class="section__head">
+        <h2>هيئة التدريس</h2>
+        <p>اضغط على أي عضو لمعرفة المواد التي يدرّسها</p>
+      </div>
+      <div class="staff" id="staffGrid"></div>
+    </section>
+
+    <a href="index.html#majors" class="btn btn--outline btn--sm back">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      العودة للتخصصات
+    </a>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__text">معاً نحو مستقبل أفضل &nbsp;|&nbsp; طلاب أهلية &nbsp;|&nbsp; <a href="team.html" class="footer__link">فريق العمل</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="page.js"></script>
+  <script src="data.js"></script>
+  <script src="content.js"></script>
+  <script src="mobile.js"></script>
+</body>
+</html>

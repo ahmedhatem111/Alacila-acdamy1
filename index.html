@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>أهلية أكاديمي | كل اللي محتاجه في مكان واحد</title>
+  <meta name="description" content="كورسات، مذكرات، داتا، ومصادر تعليمية مخصصة لطلاب أهلية.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#050a2a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="أهلية">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="icon" href="icons/icon-192.png">
+  <script src="theme.js"></script>
+  <script src="config.js"></script>
+  <script src="backend.js"></script>
+  <script src="store.js"></script>
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#home" class="logo">
+        <svg class="logo__icon" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f7bff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+          <path d="M24 3 L44 44 L34 44 L24 22 L14 44 L4 44 Z" fill="url(#lg)"/>
+          <path d="M24 30 L30 44 L18 44 Z" fill="#a78bfa"/>
+        </svg>
+        <span>أهلية أكاديمي</span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="القائمة الرئيسية">
+        <a href="#home" class="active">الرئيسية</a>
+        <a href="#years">السنوات الدراسية</a>
+        <a href="#majors">التخصصات</a>
+        <a href="#courses">الكورسات</a>
+        <a href="staff.html">هيئة التدريس</a>
+        <a href="movies.html">الأفلام</a>
+        <a href="schedule.html">جدولي</a>
+        <a href="teams.html">زملاء المشروع</a>
+        <a href="#features">المكتبة</a>
+        <a href="#certificate">الشهادات</a>
+      </nav>
+
+      <div class="header__actions">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="تفعيل الألوان المريحة للعين" title="تفعيل الألوان المريحة للعين"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.200"/><path d="M12 2v2.500M12 19.500V22M2 12h2.500M19.500 12H22M4.900 4.900l1.800 1.800M17.300 17.300l1.800 1.800M4.900 19.100l1.800-1.800M17.300 6.700l1.800-1.800"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.800A9 9 0 1111.200 3a7 7 0 009.800 9.800z"/></svg></button>
+        <button type="button" class="btn btn--outline btn--sm" id="authBtn" data-open-auth="login">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          <span id="authLabel">تسجيل الدخول</span>
+        </button>
+        <button class="burger" id="burger" aria-label="فتح القائمة" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="hero container" id="home">
+      <div class="hero__text">
+        <h1>كل اللي محتاجه<br><span class="grad">في مكان واحد</span></h1>
+        <p>كورسات، مذكرات، داتا، ومصادر تعليمية<br>مخصصة لطلاب أهلية.</p>
+        <div class="hero__btns">
+          <a href="#courses" class="btn btn--primary">
+            ابدأ التعلّم
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          </a>
+          <a href="#majors" class="btn btn--outline">استكشف التخصصات</a>
+        </div>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <div class="float-card fc-progress">
+          <div class="fc-icon">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#5aa0ff" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="17" r="1"/></svg>
+          </div>
+          <div class="fc-body">
+            <strong>تطوير تطبيقات الجوال</strong>
+            <div class="bar"><i style="--w:68%"></i></div>
+            <small>68% إكمال</small>
+          </div>
+        </div>
+        <div class="float-card fc-cert">
+          <div class="fc-body">
+            <strong>شهادة إتمام الكورس</strong>
+            <small>تم إكمال الكورس بنجاح</small>
+          </div>
+          <div class="mini-cert"><span class="seal"></span></div>
+        </div>
+        <div class="float-card fc-notes">
+          <div class="fc-icon">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#5aa0ff" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M9 12h8M9 16h8"/></svg>
+          </div>
+          <div class="fc-body">
+            <strong>مذكرات ومصادر</strong>
+            <small dir="ltr">PDF • Slides • Data</small>
+          </div>
+          <svg class="dl" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#5aa0ff" stroke-width="2"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Features ===== -->
+    <section class="container features" id="features">
+      <article class="card feature">
+        <svg viewBox="0 0 48 48" class="ico" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M24 4l16 6v12c0 10-7 18-16 22C15 40 8 32 8 22V10z"/><path d="M24 16l2.4 5 5.6.6-4.1 3.8 1.2 5.5L24 28l-5.1 2.9 1.2-5.5-4.1-3.8 5.6-.6z" fill="currentColor"/></svg>
+        <h3>شهادات إتمام</h3>
+        <p>احصل على شهادات معتمدة<br>تثبت مهاراتك وإنجازاتك</p>
+      </article>
+      <article class="card feature">
+        <svg viewBox="0 0 48 48" class="ico" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M5 12a3 3 0 013-3h10l4 5h18a3 3 0 013 3v20a3 3 0 01-3 3H8a3 3 0 01-3-3z"/></svg>
+        <h3>مسارات لكل تخصص</h3>
+        <p>مسارات تعليمية مبنية<br>من البداية للاحتراف</p>
+      </article>
+      <article class="card feature">
+        <svg viewBox="0 0 48 48" class="ico" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M24 12c-4-4-12-4-18-2v26c6-2 14-2 18 2 4-4 12-4 18-2V10c-6-2-14-2-18 2z"/><path d="M24 12v26"/></svg>
+        <h3>مكتبة الماتيريال</h3>
+        <p>مذكرات، ملخصات، امتحانات<br>ومصادر موثوقة</p>
+      </article>
+      <article class="card feature">
+        <svg viewBox="0 0 48 48" class="ico" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><rect x="6" y="8" width="36" height="32" rx="5"/><path d="M20 17l11 7-11 7z" fill="currentColor"/></svg>
+        <h3>كورسات منظمة</h3>
+        <p>محاضرات مرتبة مع شروحات<br>وبأسلوب بسيط وواضح</p>
+      </article>
+    </section>
+
+    <!-- ===== Years (before choosing a major) ===== -->
+    <section class="container section" id="years">
+      <div class="section__head">
+        <h2>السنة الأولى والسنة الثانية</h2>
+        <p>مواد مشتركة لكل الطلاب قبل اختيار التخصص</p>
+      </div>
+      <div class="years">
+        <a href="year1.html" class="card year" data-open-auth="login" data-target="year1.html">
+          <div class="year__head">
+            <span class="year__num" aria-hidden="true">١</span>
+            <div>
+              <h3>السنة الأولى</h3>
+              <p>الأساسيات التي تبني عليها باقي دراستك.</p>
+            </div>
+          </div>
+          <ul class="chips">
+            <li>أساسيات الحاسب</li>
+            <li>مقدمة في البرمجة</li>
+            <li>الرياضيات</li>
+            <li>اللغة الإنجليزية</li>
+          </ul>
+          <span class="continue">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg>
+            استعرض مواد السنة الأولى
+          </span>
+        </a>
+        <a href="year2.html" class="card year" data-open-auth="login" data-target="year2.html">
+          <div class="year__head">
+            <span class="year__num" aria-hidden="true">٢</span>
+            <div>
+              <h3>السنة الثانية</h3>
+              <p>تعمّق في البرمجة وتجهّز لاختيار تخصصك.</p>
+            </div>
+          </div>
+          <ul class="chips">
+            <li>هياكل البيانات</li>
+            <li>البرمجة الكائنية</li>
+            <li>قواعد البيانات</li>
+            <li>التراكيب المتقطعة</li>
+          </ul>
+          <span class="continue">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg>
+            استعرض مواد السنة الثانية
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== Majors ===== -->
+    <section class="container section" id="majors">
+      <div class="section__head">
+        <h2>اختار تخصصك</h2>
+        <p>بعد السنة الثانية، كل تخصص بحتوي على كورسات ومصادر مصممة خصيصاً لطلاب أهلية</p>
+      </div>
+
+      <div class="majors">
+        <a href="#" class="card major" data-major="cs">
+          <span class="major__icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="11" width="26" height="26" rx="4"/><path d="M18 20l-4 4 4 4M30 20l4 4-4 4M26 18l-4 12M17 5v6M24 5v6M31 5v6M17 37v6M24 37v6M31 37v6"/></svg></span>
+          <span class="major__text"><strong>علوم الحاسب</strong><small>البرمجة ، الخوارزميات ، قواعد البيانات</small></span>
+          <svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
+        </a>
+        <a href="#" class="card major" data-major="ai">
+          <span class="major__icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8c-3-3-9-2-10 3-4 1-6 5-4 9-2 3-1 8 3 9 1 4 6 6 11 3 5 3 10 1 11-3 4-1 5-6 3-9 2-4 0-8-4-9-1-5-7-6-10-3z"/><path d="M24 8v32M18 18l6 4M30 20l-6 4M18 30l6-4"/></svg></span>
+          <span class="major__text"><strong>الذكاء الاصطناعي</strong><small>تعلم الآلة ، التعميق التعلم ، الرؤية الحاسوبية</small></span>
+          <svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
+        </a>
+        <a href="#" class="card major" data-major="is">
+          <span class="major__icon"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4"><ellipse cx="24" cy="11" rx="14" ry="5"/><path d="M10 11v26c0 3 6 5 14 5s14-2 14-5V11M10 24c0 3 6 5 14 5s14-2 14-5"/></svg></span>
+          <span class="major__text"><strong>نظم المعلومات</strong><small>تحليل النظم ، قواعد البيانات ، إدارة المشاريع</small></span>
+          <svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== Courses ===== -->
+    <section class="container section" id="courses">
+      <div class="section__head">
+        <h2>أبرز الكورسات</h2>
+        <p>كورسات مختارة تساعدك على بناء مهاراتك خطوة بخطوة</p>
+      </div>
+
+      <div class="courses">
+        <article class="card course">
+          <div class="course__thumb thumb--web">
+            <svg viewBox="0 0 120 80" width="150"><rect x="22" y="8" width="76" height="50" rx="4" fill="#0b1b4d" stroke="#4f9bff" stroke-width="2"/><path d="M52 26l-8 10 8 10M68 26l8 10-8 10M63 22l-6 28" stroke="#4fc3ff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M8 66h104l-8-8H16z" fill="#1c3a8a" stroke="#4f9bff"/></svg>
+          </div>
+          <div class="course__body">
+            <h3>تطوير تطبيقات الويب</h3>
+            <p>HTML • CSS • JavaScript</p>
+            <div class="meta"><span class="time"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 12 ساعة</span></div>
+            <a href="#" class="continue" data-open-auth="login" data-target="courses.html"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg> ابدأ الكورس</a>
+          </div>
+        </article>
+
+        <article class="card course">
+          <div class="course__thumb thumb--ml">
+            <svg viewBox="0 0 120 80" width="120"><g stroke="#4fc3ff" stroke-width="1.2" fill="none"><path d="M60 8c-14-6-30 4-28 18-10 6-8 22 4 26 2 12 18 16 24 6 6 10 22 6 24-6 12-4 14-20 4-26 2-14-14-24-28-18z"/><path d="M60 8v52M44 24l16 14M76 26L60 40M44 46l16-8"/></g><g fill="#9fdcff"><circle cx="44" cy="24" r="2.5"/><circle cx="76" cy="26" r="2.5"/><circle cx="60" cy="40" r="3"/><circle cx="44" cy="46" r="2.5"/><circle cx="60" cy="8" r="2.5"/></g></svg>
+          </div>
+          <div class="course__body">
+            <h3>تعلم الآلة</h3>
+            <p>مفاهيم وتطبيقات عملية</p>
+            <div class="meta"><span class="time"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 10 ساعة</span></div>
+            <a href="#" class="continue" data-open-auth="login" data-target="courses.html"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg> ابدأ الكورس</a>
+          </div>
+        </article>
+
+        <article class="card course">
+          <div class="course__thumb thumb--py">
+            <svg viewBox="0 0 64 64" width="62"><path d="M32 4c-12 0-12 6-12 6v8h13v3H14s-10-1-10 14 9 14 9 14h6v-8s0-9 9-9h13s8 0 8-8V12S40 4 32 4z" fill="#3b82f6"/><path d="M32 60c12 0 12-6 12-6v-8H31v-3h19s10 1 10-14-9-14-9-14h-6v8s0 9-9 9H23s-8 0-8 8v14s-1 8 17 8z" fill="#facc15"/><circle cx="26" cy="12" r="2.4" fill="#fff"/><circle cx="38" cy="52" r="2.4" fill="#fff"/></svg>
+          </div>
+          <div class="course__body">
+            <h3>بايثون للمبتدئين</h3>
+            <p>بناء البرامج من الصفر</p>
+            <div class="meta"><span class="time"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 8 ساعة</span></div>
+            <a href="#" class="continue" data-open-auth="login" data-target="courses.html"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg> ابدأ الكورس</a>
+          </div>
+        </article>
+
+        <article class="card course">
+          <div class="course__thumb thumb--db">
+            <svg viewBox="0 0 64 72" width="64"><defs><linearGradient id="dbg" x1="0" x2="1"><stop offset="0" stop-color="#2d6bff"/><stop offset="1" stop-color="#4fd0ff"/></linearGradient></defs><ellipse cx="32" cy="14" rx="26" ry="10" fill="url(#dbg)"/><path d="M6 14v14c0 6 12 10 26 10s26-4 26-10V14c0 6-12 10-26 10S6 20 6 14zM6 30v14c0 6 12 10 26 10s26-4 26-10V30c0 6-12 10-26 10S6 36 6 30z" fill="#1d4ed8"/><path d="M6 46v10c0 6 12 10 26 10s26-4 26-10V46c0 6-12 10-26 10S6 52 6 46z" fill="#1e40af"/></svg>
+          </div>
+          <div class="course__body">
+            <h3>قواعد البيانات</h3>
+            <p>تصميم قواعد البيانات • SQL</p>
+            <div class="meta"><span class="time"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 6 ساعات</span></div>
+            <a href="#" class="continue" data-open-auth="login" data-target="courses.html"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg> ابدأ الكورس</a>
+          </div>
+        </article>
+      </div>
+      <div class="more">
+        <a href="courses.html" class="btn btn--primary" data-open-auth="login" data-target="courses.html">
+          عرض المزيد
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== Certificate ===== -->
+    <section class="container section" id="certificate">
+      <div class="card cert-banner">
+        <div class="cert-banner__text">
+          <div class="cert-badge">
+            <svg viewBox="0 0 48 48" width="28" height="28" fill="none" stroke="#7aa8ff" stroke-width="2.2"><circle cx="24" cy="20" r="10"/><path d="M18 29l-4 14 10-5 10 5-4-14"/></svg>
+          </div>
+          <div>
+            <h2>شهادة إتمام الكورس</h2>
+            <p>احصل على شهادة معتمدة بعد إتمام أي كورس<br>وأضفها إلى ملفك الشخصي لتدعم مستقبلك الأكاديمي والمهني.</p>
+            <a href="#" class="btn btn--outline btn--sm">
+              اعرف المزيد
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="cert-paper" aria-hidden="true">
+          <small>أهلية أكاديمي</small>
+          <strong>شهادة إتمام الكورس</strong>
+          <em>تم منح هذه الشهادة بنجاح لإنجاز متطلبات الكورس</em>
+          <i class="line"></i><i class="line short"></i>
+          <span class="seal"></span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#home" class="logo">
+        <svg class="logo__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 3L44 44H34L24 22 14 44H4z" fill="url(#lg)"/><path d="M24 30l6 14H18z" fill="#a78bfa"/></svg>
+        <span>أهلية أكاديمي</span>
+      </a>
+      <p class="footer__text">معاً نحو مستقبل أفضل &nbsp;|&nbsp; طلاب أهلية &nbsp;|&nbsp; <a href="team.html" class="footer__link">فريق العمل</a></p>
+      <div class="socials">
+        <a href="https://www.facebook.com/profile.php?id=61594780539498" aria-label="Facebook"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M13.5 22v-8.200h2.800l.5-3.300h-3.300V8.400c0-.9.400-1.700 1.800-1.700h1.600V3.800c-.3 0-1.300-.2-2.500-.2-2.600 0-4.200 1.500-4.200 4.300v2.600H7.400v3.300h2.800V22z"/></svg></a>
+        <a href="https://www.instagram.com/ahliyahacademy?stkn=MTkyZnB0NmY5MTJtNg==" aria-label="Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.300" cy="6.700" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.linkedin.com/company/ahliyah-academy/" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M3 3h18v18H3zM8 10H5.500v8.500H8zM6.800 6.200a1.500 1.500 0 100 3 1.500 1.500 0 000-3zM18.500 18.500v-4.800c0-2.300-1.200-3.800-3.200-3.800-1.100 0-1.800.6-2.200 1.200V10H10.600v8.500h2.500v-4.600c0-1.200.6-1.900 1.500-1.900s1.400.7 1.400 1.900v4.600z" fill-rule="evenodd"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="mobile.js"></script>
+</body>
+</html>
