@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>تسجيل الدخول | أهلية أكاديمي</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <meta name="theme-color" content="#050a2a">
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#050a2a">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="أهلية">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="icon" href="icons/icon-192.png">
-  <script src="theme.js"></script>
-  <script src="config.js"></script>
-  <script src="backend.js"></script>
-  <script src="store.js"></script>
-</head>
-<body data-page="login">
-  <canvas id="stars" aria-hidden="true"></canvas>
 
-  <header class="header">
-    <div class="container header__inner">
-      <a href="index.html" class="logo">
-        <svg class="logo__icon" viewBox="0 0 48 48" aria-hidden="true">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>تسجيل الدخول | أهلية أكاديمي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#050a2a">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#050a2a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="أهلية">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="icon" href="icons/icon-192.png">
+    <script src="theme.js"></script>
+    <script src="config.js"></script>
+    <script src="backend.js"></script>
+    <script src="store.js"></script>
+</head>
+
+<body data-page="login">
+    <canvas id="stars" aria-hidden="true"></canvas>
+
+    <header class="header">
+        <div class="container header__inner">
+            <a href="index.html" class="logo">
+                <svg class="logo__icon" viewBox="0 0 48 48" aria-hidden="true">
           <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f7bff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
           <path d="M24 3 L44 44 L34 44 L24 22 L14 44 L4 44 Z" fill="url(#lg)"/><path d="M24 30 L30 44 L18 44 Z" fill="#a78bfa"/>
         </svg>
-        <span>أهلية أكاديمي</span>
-      </a>
-      <div class="header__actions">
-        <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="تفعيل الألوان المريحة للعين" title="تفعيل الألوان المريحة للعين"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.200"/><path d="M12 2v2.500M12 19.500V22M2 12h2.500M19.500 12H22M4.900 4.900l1.800 1.800M17.300 17.300l1.800 1.800M4.900 19.100l1.800-1.800M17.300 6.700l1.800-1.800"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.800A9 9 0 1111.200 3a7 7 0 009.800 9.800z"/></svg></button>
-        <a href="team.html" class="btn btn--outline btn--sm hide-sm">فريق العمل</a>
-        <a href="index.html" class="btn btn--outline btn--sm">العودة للرئيسية</a>
-      </div>
-    </div>
-  </header>
+                <span>أهلية أكاديمي</span>
+            </a>
+            <div class="header__actions">
+                <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="تفعيل الألوان المريحة للعين" title="تفعيل الألوان المريحة للعين"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.200"/><path d="M12 2v2.500M12 19.500V22M2 12h2.500M19.500 12H22M4.900 4.900l1.800 1.800M17.300 17.300l1.800 1.800M4.900 19.100l1.800-1.800M17.300 6.700l1.800-1.800"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.800A9 9 0 1111.200 3a7 7 0 009.800 9.800z"/></svg></button>
+                <a href="team.html" class="btn btn--outline btn--sm hide-sm">فريق العمل</a>
+                <a href="index.html" class="btn btn--outline btn--sm">العودة للرئيسية</a>
+            </div>
+        </div>
+    </header>
 
-  <main class="container login">
-    <section class="login__card card" aria-label="الدخول إلى الحساب">
-      <p class="auth-note" id="authNote" hidden>سجّل دخولك لتتمكن من فتح الصفحة التي طلبتها.</p>
+    <main class="container login">
+        <section class="login__card card" aria-label="الدخول إلى الحساب">
+            <p class="auth-note" id="authNote" hidden>سجّل دخولك لتتمكن من فتح الصفحة التي طلبتها.</p>
+            <p class="auth-note" id="offlineNote" role="note" hidden>وضع ضيف محلي: اكتب أي اسم وكلمة مرور للدخول. لا يوجد تحقق أو حساب حقيقي، ولا تُحفظ كلمة المرور. بيانات هذا الضيف على هذا الجهاز فقط وتُحذف عند تسجيل الخروج.</p>
 
-      <!-- Login -->
-      <form class="auth-form" id="loginForm" novalidate>
-        <h1 class="auth-title">تسجيل الدخول</h1>
-        <p class="auth-sub">أهلاً بعودتك، سجّل دخولك لتبدأ التعلّم.</p>
+            <!-- Login -->
+            <form class="auth-form" id="loginForm" novalidate>
+                <h1 class="auth-title">تسجيل الدخول</h1>
+                <p class="auth-sub">أهلاً بعودتك، سجّل دخولك لتبدأ التعلّم.</p>
 
-        <label class="field">
+                <label class="field">
           <span>البريد الإلكتروني</span>
           <input type="email" name="email" autocomplete="email" placeholder="name@example.com" dir="ltr" required>
           <small class="err"></small>
         </label>
-        <label class="field">
+                <label class="field">
           <span>كلمة المرور</span>
           <div class="pw">
             <input type="password" name="password" autocomplete="current-password" placeholder="••••••••" dir="ltr" required>
@@ -64,29 +67,29 @@
           <small class="err"></small>
         </label>
 
-        <button type="submit" class="btn btn--primary btn--block">دخول</button>
-        <p class="form-msg" role="status"></p>
+                <button type="submit" class="btn btn--primary btn--block">دخول</button>
+                <p class="form-msg" role="status"></p>
 
-        <div class="auth-divider"><span>ليس لديك حساب؟</span></div>
-        <button type="button" class="btn btn--outline btn--block" data-switch="signup">إنشاء حساب</button>
-      </form>
+                <div class="auth-divider"><span>ليس لديك حساب؟</span></div>
+                <button type="button" class="btn btn--outline btn--block" data-switch="signup">إنشاء حساب</button>
+            </form>
 
-      <!-- Sign up -->
-      <form class="auth-form" id="signupForm" novalidate hidden>
-        <h1 class="auth-title">إنشاء حساب</h1>
-        <p class="auth-sub">انضم إلى أهلية أكاديمي وابدأ رحلتك.</p>
+            <!-- Sign up -->
+            <form class="auth-form" id="signupForm" novalidate hidden>
+                <h1 class="auth-title">إنشاء حساب</h1>
+                <p class="auth-sub">انضم إلى أهلية أكاديمي وابدأ رحلتك.</p>
 
-        <label class="field">
+                <label class="field">
           <span>الاسم الكامل</span>
           <input type="text" name="name" autocomplete="name" placeholder="اكتب اسمك" required>
           <small class="err"></small>
         </label>
-        <label class="field">
+                <label class="field">
           <span>البريد الإلكتروني</span>
           <input type="email" name="email" autocomplete="email" placeholder="name@example.com" dir="ltr" required>
           <small class="err"></small>
         </label>
-        <label class="field">
+                <label class="field">
           <span>السنة / التخصص</span>
           <select name="major" required>
             <option value="">اختر سنتك الدراسية أو تخصصك</option>
@@ -102,40 +105,43 @@
           </select>
           <small class="err"></small>
         </label>
-        <div class="field-row">
-          <label class="field">
+                <div class="field-row">
+                    <label class="field">
             <span>كلمة المرور</span>
             <input type="password" name="password" autocomplete="new-password" placeholder="8 أحرف على الأقل" dir="ltr" required>
             <small class="err"></small>
           </label>
-          <label class="field">
+                    <label class="field">
             <span>تأكيد كلمة المرور</span>
             <input type="password" name="confirm" autocomplete="new-password" placeholder="أعد كتابتها" dir="ltr" required>
             <small class="err"></small>
           </label>
-        </div>
+                </div>
 
-        <button type="submit" class="btn btn--primary btn--block">إنشاء الحساب</button>
-        <p class="form-msg" role="status"></p>
+                <button type="submit" class="btn btn--primary btn--block">إنشاء الحساب</button>
+                <p class="form-msg" role="status"></p>
 
-        <div class="auth-divider"><span>لديك حساب بالفعل؟</span></div>
-        <button type="button" class="btn btn--outline btn--block" data-switch="login">تسجيل الدخول</button>
-      </form>
-    </section>
+                <div class="auth-divider"><span>لديك حساب بالفعل؟</span></div>
+                <button type="button" class="btn btn--outline btn--block" data-switch="login">تسجيل الدخول</button>
+            </form>
+        </section>
 
-    <aside class="login__side" aria-hidden="false">
-      <h2>كل اللي <span class="grad">محتاجه</span> في مكان واحد</h2>
-      <p>كورسات ومذكرات وسلايد مخصصة لطلاب أهلية، مرتبة حسب السنة والترم والتخصص.</p>
-      <ul class="login__points">
-        <li><span class="login__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6zM9 13h8M9 17h8"/></svg></span>ملفات وسلايد لكل مادة تفتحها وتحمّلها</li>
-        <li><span class="login__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></span>السنة الأولى والثانية ثم تخصصك بعدها</li>
-        <li><span class="login__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 4a4 4 0 010 7M22 21c0-3-1.500-5-4-5.700"/></svg></span>تعرّف على دكاترتك ومعيديك وموادهم</li>
-      </ul>
-    </aside>
-  </main>
+        <aside class="login__side" aria-hidden="false">
+            <h2>كل اللي <span class="grad">محتاجه</span> في مكان واحد</h2>
+            <p>كورسات ومذكرات وسلايد مخصصة لطلاب أهلية، مرتبة حسب السنة والترم والتخصص.</p>
+            <ul class="login__points">
+                <li><span class="login__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6zM9 13h8M9 17h8"/></svg></span>ملفات وسلايد لكل مادة تفتحها وتحمّلها</li>
+                <li><span class="login__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></span>السنة
+                    الأولى والثانية ثم تخصصك بعدها</li>
+                <li><span class="login__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 4a4 4 0 010 7M22 21c0-3-1.500-5-4-5.700"/></svg></span>تعرّف
+                    على دكاترتك ومعيديك وموادهم</li>
+            </ul>
+        </aside>
+    </main>
 
-  <script src="script.js"></script>
-  <script src="auth.js"></script>
-  <script src="mobile.js"></script>
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="mobile.js"></script>
 </body>
+
 </html>
